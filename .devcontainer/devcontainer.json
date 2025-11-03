@@ -1,34 +1,53 @@
 // For format details, see https://aka.ms/devcontainer.json. For config options, see the README at:
 // https://github.com/microsoft/vscode-dev-containers/tree/v0.245.2/containers/debian
-{
-	"name": "Conda",
-	"image": "mcr.microsoft.com/vscode/devcontainers/base:0-bullseye",
+#{
+#	"name": "Conda",
+#	"image": "mcr.microsoft.com/vscode/devcontainers/base:0-bullseye",
 
 	// Comment out to connect as root instead. More info: https://aka.ms/vscode-remote/containers/non-root.
-	"remoteUser": "vscode",
+#	"remoteUser": "vscode",
 
 	// Setup conda environment
-	"onCreateCommand": ".devcontainer/onCreate-conda.sh || true",
+#	"onCreateCommand": ".devcontainer/onCreate-conda.sh || true",
 
 	// Install additional features.
-	"features": {
+#	"features": {
 		// For config options, see https://github.com/devcontainers/features/tree/main/src/conda
-		"ghcr.io/devcontainers/features/conda": {
-            "version": "latest",
-			"addCondaForge": "true"
+#		"ghcr.io/devcontainers/features/conda": {
+ #           "version": "latest",
+#			"addCondaForge": "true"
+ #       }
+#	},
+#	"customizations": {
+#		"vscode": {
+#			"extensions": [
+#				"guyskk.language-cython",
+#				"ms-toolsai.jupyter",
+#				"ms-python.vscode-pylance",
+#				"ms-python.python",
+#				"lextudio.restructuredtext",
+#				"trond-snekvik.simple-rst",
+#				"charliermarsh.ruff"
+#			]
+#		}
+#	}
+#}
+{
+    "name": "SageMath CTF Development",
+    "image": "mcr.microsoft.com/devcontainers/python:3.11-ubuntu-jammy",
+    "features": {
+        "ghcr.io/devcontainers/features/git:1": {},
+        "ghcr.io/devcontainers-contrib/features/conda:1": {}
+    },
+    "postCreateCommand": "conda install -c conda-forge sage -y",
+    "customizations": {
+        "vscode": {
+            "extensions": [
+                "ms-python.python",
+                "ms-python.vscode-pylance"
+            ]
         }
-	},
-	"customizations": {
-		"vscode": {
-			"extensions": [
-				"guyskk.language-cython",
-				"ms-toolsai.jupyter",
-				"ms-python.vscode-pylance",
-				"ms-python.python",
-				"lextudio.restructuredtext",
-				"trond-snekvik.simple-rst",
-				"charliermarsh.ruff"
-			]
-		}
-	}
+    },
+    "forwardPorts": [8888],
+    "remoteUser": "root"
 }
